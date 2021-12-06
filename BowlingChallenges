@@ -1,0 +1,127 @@
+Table given:
+
+Rolls       1 – 4   4 – 5  6 - /  5 - /    X    0 – 1   7 - /   6 - /    X     2 - / - 6
+Total score   5       14    29     49      60    61      77      97      117      133
+
+Below is the Approach: Total 10 frame's
+
+Frame 1:
+Rolls = 1-4
+Score = 5
+
+Frame 2:
+Rolls = 4-5
+Score = 14  
+
+How :  5+4+5 = 14 (last frame scrore + currentRollsScore + NextRollsScroe)
+
+Frame 3:
+Rolls = 6-/
+Score = 29  
+
+How :  14+6+4+5 = 14 (last frame scrore + currentRollsScore + NextRollsScroe + Spare bonuses)
+
+Frame 4:
+Rolls = 5-/
+Score = 29  
+
+How :  29+5+5+10 = 49 (last frame scrore + currentRollsScore + NextRollsScroe + Spare bonuses)
+
+
+Frame 5:
+Rolls = X
+Score = 60
+
+How :  49+10+1 = 60 (last frame scrore + Strike bonuses + 1st rolls)
+
+
+Frame 6:
+Rolls = 0-1
+Score = 61
+
+How :   60+0+1=61 (last frame scrore  + 1st rollScore + 2nd rollsScore)
+
+Frame 7:
+Rolls = 7-1
+Score = 77
+                                            (10'strike-3)   + (10'strike-4)   
+How :   61+7+3+6=77 (last frame scrore  + 1st rollScore + 2nd rollsScore)
+
+Frame 8:
+Rolls = 6-1
+Score = 97
+                                                           (10'strike-4)   
+How :   77+6+4+10=97 (last frame scrore  + 1st rollScore + 2nd rollsScore + StrikeBouneses)
+
+
+Frame 9:
+Rolls = X
+Score = 117
+                                                           
+How :   97+10+2+8=117 (last frame scrore  + strike bouncese + 1st rollsScore + 2nd rollsScore)
+
+
+Frame 10:
+Rolls = 2-/-6
+Score = 133
+                                                           
+How :   117+2+8+6=133 (last frame scrore  +  1st rollsScore + spare bouncese +  2nd rollsScore)
+
+
+
+################ CODE ###########
+
+
+import java.util.Scanner;
+
+public class BlowingTask 
+{
+
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		int rolls[] = new int [21];
+		int frame[] = new int [10];
+		char strike = 'X'; 
+		char spare = '/'; 
+		char gutter = '-'; 
+		int strikes = 0;
+		int spares = 0;
+		int total = 0;
+		String playerName;
+		System.out.print("Enter player name: ");
+		player = input.next();
+		System.out.println("BOWLING FRAME FOR " +player.toUpperCase() ");
+		System.out.println("When entering scores, enter "X" for a strike, "/" for a spare, and "-\" for a gutter ball.");
+		
+		for (int i = 1; i <= 10; i++)
+		{
+				System.out.println("Frame: " + i );
+				System.out.print("Score for Roll 1:");
+				rolls[i] = input.nextInt();
+				System.out.print("Score for Roll 2:");
+				rolls[i] = input.nextInt();
+				frame[i] = rolls[i] + rolls[i];
+				
+				if (rolls[i] == strike)
+				{
+					rolls[i] = 10 + rolls[i] + rolls [i];
+					
+				}
+				if (rolls[i] == spare)
+				{
+					rolls[i] = 10 + rolls[i];
+				}
+				if (rolls[i] == gutter)
+				{
+					rolls[i] = 0;
+				}
+		}
+		
+			System.out.println(frame[0] + " " + frame[1] + " " + frame[2]);
+			
+		
+	}
+
+}
+ 
